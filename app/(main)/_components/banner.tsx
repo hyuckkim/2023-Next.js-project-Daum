@@ -33,7 +33,7 @@ export const Banner = ({
   };
 
   const onRestore = () => {
-    const promise = remove({ id: documentId });
+    const promise = restore({ id: documentId });
 
     toast.promise(promise, {
       loading: "Restoring note...",

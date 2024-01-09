@@ -67,7 +67,7 @@ export const SearchCommand = () => {
             >
               {document.icon ? (
                 <p className="mr-2 text-[18px]">
-                  document.icon
+                  {document.icon}
                 </p>
               ) : (
                 <File className="mr-2 h-4 w-4" />
