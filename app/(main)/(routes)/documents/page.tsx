@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const DocumentsPage = () => {
   const router = useRouter();
