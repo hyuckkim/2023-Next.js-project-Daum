@@ -2,15 +2,17 @@
 
 import { useTheme } from "next-themes";
 import {
-  BlockNoteEditor
+ defaultBlockSpecs,
 } from "@blocknote/core";
 import {
   useBlockNote,
   BlockNoteView,
+  getDefaultReactSlashMenuItems,
 } from "@blocknote/react";
 import "@blocknote/react/style.css";
 
 import { useEdgeStore } from "@/lib/edgestore";
+import { helloworldBlock, insertHelloworldBlock } from "./blocks/helloworldblock";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -34,7 +36,7 @@ export const Editor = ({
     return response.url;
   }
 
-  const editor: BlockNoteEditor = useBlockNote({
+  const editor = useBlockNote({
     editable,
     initialContent: 
       initialContent 
@@ -43,8 +45,13 @@ export const Editor = ({
     onEditorContentChange: (editor) => {
       onChange(JSON.stringify(editor.topLevelBlocks, null, 2));
     },
-    uploadFile: handleUpload
-  })
+    uploadFile: handleUpload,
+    blockSpecs: {
+      ...defaultBlockSpecs,
+      helloworld: helloworldBlock
+    },
+    slashMenuItems: [...getDefaultReactSlashMenuItems(), insertHelloworldBlock]
+  });
 
   return (
     <div>
