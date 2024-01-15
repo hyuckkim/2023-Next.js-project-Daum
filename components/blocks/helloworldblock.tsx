@@ -11,17 +11,42 @@ export const helloworldBlock = createReactBlockSpec(
         default: "John doe",
       }
     } as const,
-    content: "inline",
+    content: "none",
   },
   {
-    render: ({ block }) => (
-      <div>
-        hello, 
-        <input className="w-24 pl-2 italic" value={block.props.name}/>!
-      </div>
-    ),
+    render: ({ block, editor }) => (
+      <RenderHelloworldBlock 
+        name={block.props.name} 
+        onChange={(name) => {
+          editor.updateBlock(block, {
+            type: "helloworld",
+            props: { name: name }
+          });
+        }}
+      />
+    )
   }
 );
+
+const RenderHelloworldBlock = ({
+  name,
+  onChange,
+} : {
+  name: string
+  onChange: (name: string) => void
+}) => {
+
+  return (
+    <div>
+      hello, 
+      <input
+        className="w-24 pl-2 italic"
+        value={name}
+        onChange={(e) => onChange(e.target.value)}
+      />!
+    </div>
+  );
+}
 
 export const insertHelloworldBlock: ReactSlashMenuItem<
   BlockSchemaWithBlock<"helloworld", typeof helloworldBlock.config>
