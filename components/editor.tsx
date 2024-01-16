@@ -13,6 +13,7 @@ import "@blocknote/react/style.css";
 
 import { useEdgeStore } from "@/lib/edgestore";
 import { helloworldBlock, insertHelloworldBlock } from "./blocks/helloworldblock";
+import { TimelineBlockSpec, insertTimelineBlock } from "./blocks/timeline/timeline";
 
 interface EditorProps {
   onChange: (value: string) => void;
@@ -48,9 +49,13 @@ export const Editor = ({
     uploadFile: handleUpload,
     blockSpecs: {
       ...defaultBlockSpecs,
-      helloworld: helloworldBlock
+      helloworld: helloworldBlock,
+      timeline: TimelineBlockSpec,
     },
-    slashMenuItems: [...getDefaultReactSlashMenuItems(), insertHelloworldBlock]
+    slashMenuItems: [...getDefaultReactSlashMenuItems(), 
+      insertHelloworldBlock,
+      insertTimelineBlock,
+    ]
   });
 
   return (
